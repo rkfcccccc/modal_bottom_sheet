@@ -167,7 +167,13 @@ class ModalBottomSheetState extends State<ModalBottomSheet>
   }
 
   void _cancelClose() {
-    widget.animationController.forward().then((value) {
+    widget.animationController
+        .animateTo(
+      widget.animationController.upperBound,
+      duration: Duration(milliseconds: 500),
+      curve: Curves.fastOutSlowIn,
+    )
+        .then((value) {
       // When using WillPop, animation doesn't end at 1.
       // Check more in detail the problem
       if (!widget.animationController.isCompleted) {
